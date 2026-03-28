@@ -1,10 +1,10 @@
 import { AppLayout } from "@/layouts";
 import React from "react";
 
-export const AccountPage: React.FC = () => {
+export const CreateAccountPage: React.FC = () => {
   return (
     <AppLayout>
-      <div>Create or edit Account</div>
+      <div>Create New Account</div>
     </AppLayout>
   );
 };

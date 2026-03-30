@@ -2,6 +2,7 @@ import { AppLayout } from "@/layouts";
 import React from "react";
 import { Account } from "./create-account.vm";
 import { CreateAccountFormComponent } from "./components";
+import classes from "./create-account.page.module.css";
 
 const createAccountMock: Account = { type: "Cuenta corriente", name: "coche" };
 
@@ -20,11 +21,14 @@ export const CreateAccountPage: React.FC = () => {
   };
   return (
     <AppLayout>
-      <div>Create New Account</div>
-      <CreateAccountFormComponent
-        newAccount={accounts}
-        onCreateAccount={handleCreateAccount}
-      />
+      <div className={classes.container}>
+        <h1 className={classes.title}>Cuenta Bancaria</h1>
+
+        <CreateAccountFormComponent
+          newAccount={accounts}
+          onCreateAccount={handleCreateAccount}
+        />
+      </div>
     </AppLayout>
   );
 };

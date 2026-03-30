@@ -1,5 +1,13 @@
 import React from "react";
-import { Account, createEmptyAccountVm } from "../create-account.vm";
+import {
+  Account,
+  AccountError,
+  createEmptyAccountError,
+  createEmptyAccountVm,
+} from "../create-account.vm";
+import { validateForm } from "../validations";
+
+import classes from "./create-account-form.component.module.css";
 
 interface Props {
   newAccount: Account;
@@ -10,10 +18,17 @@ export const CreateAccountFormComponent: React.FC<Props> = (props) => {
   const { onCreateAccount } = props;
   const [account, setAccount] = React.useState<Account>(createEmptyAccountVm());
 
+  const [errors, setErrors] = React.useState<AccountError>(
+    createEmptyAccountError(),
+  );
+
   const handleCreateAccount = (e: React.FormEvent) => {
     e.preventDefault();
-    onCreateAccount(account);
-    console.log("va");
+    const formValidationResult = validateForm(account);
+    setErrors(formValidationResult.errors);
+    if (formValidationResult.succeeded) {
+      onCreateAccount(account);
+    }
   };
 
   const handleFieldChange = (
@@ -29,9 +44,8 @@ export const CreateAccountFormComponent: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <h2>Form</h2>
       <form onSubmit={handleCreateAccount}>
-        <div>
+        <div className={classes.formContainer}>
           <div>
             <label>Tipo de cuenta:</label>
             <select
@@ -39,18 +53,29 @@ export const CreateAccountFormComponent: React.FC<Props> = (props) => {
               id=""
               onChange={handleFieldChange}
               value={account.type}
+              className={classes.accountSelect}
             >
               <option value="">Seleccionar</option>
               <option value="1">Cuenta corriente</option>
               <option value="2">Ahorro</option>
             </select>
+            <p className={classes.error}>{errors.type}</p>
           </div>
           <div>
             <label>Alias:</label>
-            <input type="text" name="name" id="" onChange={handleFieldChange} />
+            <input
+              type="text"
+              name="name"
+              id=""
+              onChange={handleFieldChange}
+              className={classes.medium}
+            />
+            <p className={classes.error}>{errors.name}</p>
           </div>
         </div>
-        <button type="submit">Guardar</button>
+        <button type="submit" className={classes.button}>
+          GUARDAR
+        </button>
       </form>
     </div>
   );

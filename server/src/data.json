@@ -23,6 +23,30 @@
       "name": "Ahorro",
       "balance": 8500,
       "lastTransaction": "2019-11-15T08:29:04"
+    },
+    {
+      "iban": "FO17 4546 0983 8805 24",
+      "name": "Nuevo coche",
+      "type": "1",
+      "balance": 0,
+      "lastTransaction": "2026-03-30T15:11:25.402Z",
+      "id": "LJS_RH0"
+    },
+    {
+      "iban": "NO11 0800 7437 433",
+      "name": "Viaje Maldivas",
+      "type": "2",
+      "balance": 0,
+      "lastTransaction": "2026-03-30T15:12:14.440Z",
+      "id": "wp4Gzzu"
+    },
+    {
+      "iban": "SE62 3372 0058 4341 5002 0084",
+      "name": "Máster Lemoncode",
+      "type": "2",
+      "balance": 0,
+      "lastTransaction": "2026-03-30T15:17:59.691Z",
+      "id": "liuYDn2"
     }
   ],
   "movements": [
@@ -130,6 +154,17 @@
       "transferDate": "Fri Mar 27 2026",
       "realTransferDate": "",
       "id": 2
+    },
+    {
+      "accountId": "3",
+      "iban": "FO17 4546 0983 8805 24",
+      "name": "Ainoa",
+      "amount": "500",
+      "concept": "Prueba",
+      "notes": "Para el coche",
+      "transferDate": "Mon Mar 30 2026",
+      "realTransferDate": "",
+      "id": 3
     }
   ]
 }

@@ -3,21 +3,26 @@ import React from "react";
 import { Account } from "./create-account.vm";
 import { CreateAccountFormComponent } from "./components";
 import classes from "./create-account.page.module.css";
-
-const createAccountMock: Account = { type: "Cuenta corriente", name: "coche" };
+import { saveAccount } from "./api";
+import { useNavigate } from "react-router-dom";
+import { appRoutes } from "@/core/router";
 
 export const CreateAccountPage: React.FC = () => {
-  const [accounts, setAccounts] = React.useState<Account>({
+  const navigate = useNavigate();
+  const [accounts] = React.useState<Account>({
     type: "",
     name: "",
   });
 
-  React.useEffect(() => {
-    setAccounts(createAccountMock);
-  }, []);
-
   const handleCreateAccount = (newAccountInfo: Account) => {
-    console.log("Creating account with info:", newAccountInfo);
+    saveAccount(newAccountInfo).then((result) => {
+      if (result) {
+        alert("Cuenta creada correctamente");
+        navigate(appRoutes.accountList);
+      } else {
+        alert("Error al crear la cuenta");
+      }
+    });
   };
   return (
     <AppLayout>

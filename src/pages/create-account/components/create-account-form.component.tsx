@@ -7,13 +7,24 @@ interface Props {
 }
 
 export const CreateAccountFormComponent: React.FC<Props> = (props) => {
-  const { newAccount, onCreateAccount } = props;
-  const [] = React.useState<Account>(createEmptyAccountVm());
+  const { onCreateAccount } = props;
+  const [account, setAccount] = React.useState<Account>(createEmptyAccountVm());
 
   const handleCreateAccount = (e: React.FormEvent) => {
     e.preventDefault();
-    onCreateAccount(newAccount);
+    onCreateAccount(account);
     console.log("va");
+  };
+
+  const handleFieldChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setAccount({
+      ...account,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -23,7 +34,12 @@ export const CreateAccountFormComponent: React.FC<Props> = (props) => {
         <div>
           <div>
             <label>Tipo de cuenta:</label>
-            <select name="" id="">
+            <select
+              name="type"
+              id=""
+              onChange={handleFieldChange}
+              value={account.type}
+            >
               <option value="">Seleccionar</option>
               <option value="1">Cuenta corriente</option>
               <option value="2">Ahorro</option>
@@ -31,7 +47,7 @@ export const CreateAccountFormComponent: React.FC<Props> = (props) => {
           </div>
           <div>
             <label>Alias:</label>
-            <input type="text" name="name" id="" />
+            <input type="text" name="name" id="" onChange={handleFieldChange} />
           </div>
         </div>
         <button type="submit">Guardar</button>
